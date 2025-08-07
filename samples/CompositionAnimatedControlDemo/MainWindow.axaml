@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CompositionAnimatedControlDemo"
+        x:Class="CompositionAnimatedControlDemo.MainWindow"
+        Width="700" Height="520"
+        Title="CompositionAnimatedControl Demo">
+  <TabControl Margin="12">
+    <TabItem Header="Simple Animated">
+      <local:SimpleTimelineControl/>
+    </TabItem>
+    <TabItem Header="Bouncy Ball">
+      <local:BouncingBallControl/>
+    </TabItem>
+    <TabItem Header="Static Redraw">
+      <StackPanel>
+        <local:StaticRedrawControl x:Name="StaticControl" Height="260"/>
+        <Button Margin="0,8,0,0" Content="Toggle Color" Click="OnToggle"/>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="Physics Collisions">
+      <StackPanel>
+        <local:PhysicsCollisionsControl x:Name="PhysicsControl" Height="260"/>
+        <StackPanel Orientation="Horizontal" Margin="0,8,0,0" VerticalAlignment="Center">
+          <TextBlock Text="Gravity:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+          <Slider x:Name="GravitySlider"
+                  Width="360"
+                  Minimum="-30" Maximum="0" TickFrequency="0.1" IsSnapToTickEnabled="False"
+                  Value="-9.81"
+                  PropertyChanged="OnGravityChanged"/>
+          <TextBlock Margin="8,0,0,0"
+                     VerticalAlignment="Center"
+                     Text="{Binding Value, ElementName=GravitySlider, StringFormat={}{0:F2}}"/>
+          <Button Margin="16,0,0,0" Content="Restart" Click="OnRestart"/>
+        </StackPanel>
+      </StackPanel>
+    </TabItem>
+  </TabControl>
+</Window>
+

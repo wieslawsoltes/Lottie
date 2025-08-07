@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Numerics;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Logging;
 using Avalonia.Media;
 using Avalonia.Metadata;
 using Avalonia.Platform;
-using Avalonia.Rendering.Composition;
+using Avalonia.Skia.Composition;
 using SkiaSharp;
 
 namespace Avalonia.Skia.Lottie;
@@ -15,44 +14,22 @@ namespace Avalonia.Skia.Lottie;
 /// <summary>
 /// Lottie animation player control.
 /// </summary>
-public class Lottie : Control
+public class Lottie : CompositionAnimatedControl
 {
     private SkiaSharp.Skottie.Animation? _animation;
-    private int _repeatCount;
     private readonly Uri _baseUri;
     private string? _preloadPath;
-    private CompositionCustomVisual? _customVisual;
 
     /// <summary>
     /// Infinite number of repeats.
     /// </summary>
-    public const int Infinity = -1;
+    public new const int Infinity = -1;
 
     /// <summary>
     /// Defines the <see cref="Path"/> property.
     /// </summary>
     public static readonly StyledProperty<string?> PathProperty =
         AvaloniaProperty.Register<Lottie, string?>(nameof(Path));
-
-    /// <summary>
-    /// Defines the <see cref="Stretch"/> property.
-    /// </summary>
-    public static readonly StyledProperty<Stretch> StretchProperty =
-        AvaloniaProperty.Register<Lottie, Stretch>(nameof(Stretch), Stretch.Uniform);
-
-    /// <summary>Lottie
-    /// Defines the <see cref="StretchDirection"/> property.
-    /// </summary>
-    public static readonly StyledProperty<StretchDirection> StretchDirectionProperty =
-        AvaloniaProperty.Register<Lottie, StretchDirection>(
-            nameof(StretchDirection),
-            StretchDirection.Both);
-
-    /// <summary>
-    /// Defines the <see cref="RepeatCount"/> property.
-    /// </summary>
-    public static readonly StyledProperty<int> RepeatCountProperty =
-        AvaloniaProperty.Register<Lottie, int>(nameof(RepeatCount), Infinity);
 
     /// <summary>
     /// Gets or sets the Lottie animation path.
@@ -65,39 +42,13 @@ public class Lottie : Control
     }
 
     /// <summary>
-    /// Gets or sets a value controlling how the image will be stretched.
-    /// </summary>
-    public Stretch Stretch
-    {
-        get { return GetValue(StretchProperty); }
-        set { SetValue(StretchProperty, value); }
-    }
-
-    /// <summary>
-    /// Gets or sets a value controlling in what direction the image will be stretched.
-    /// </summary>
-    public StretchDirection StretchDirection
-    {
-        get { return GetValue(StretchDirectionProperty); }
-        set { SetValue(StretchDirectionProperty, value); }
-    }
-
-    /// <summary>
-    ///  Sets how many times the animation should be repeated.
-    /// </summary>
-    public int RepeatCount
-    {
-        get => GetValue(RepeatCountProperty);
-        set => SetValue(RepeatCountProperty, value);
-    }
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="Lottie"/> class.
     /// </summary>
     /// <param name="baseUri">The base URL for the XAML context.</param>
     public Lottie(Uri baseUri)
     {
         _baseUri = baseUri;
+        WireHandlers();
     }
 
     /// <summary>
@@ -107,6 +58,44 @@ public class Lottie : Control
     public Lottie(IServiceProvider serviceProvider)
     {
         _baseUri = serviceProvider.GetContextBaseUri();
+        WireHandlers();
+    }
+
+    private void WireHandlers() { }
+
+    protected override Size OnGetSourceSize()
+        => _animation is { } an ? new Size(an.Size.Width, an.Size.Height) : default;
+
+    protected override NormalizeResult OnNormalizeElapsed(TimeSpan elapsed)
+    {
+        if (_animation is null)
+            return new NormalizeResult(TimeSpan.Zero, false);
+        var duration = _animation.Duration;
+        if (duration <= TimeSpan.Zero)
+            return new NormalizeResult(elapsed, false);
+        if (elapsed <= duration)
+            return new NormalizeResult(elapsed, false);
+        var loops = (int)(elapsed.Ticks / duration.Ticks);
+        var remainder = TimeSpan.FromTicks(elapsed.Ticks % duration.Ticks);
+        return new NormalizeResult(remainder, loops > 0);
+    }
+
+    protected override void OnRender(SKCanvas canvas, Rect destRect, TimeSpan effectiveElapsed, bool isRunning)
+    {
+        var animation = _animation;
+        if (animation is null)
+        {
+            return;
+        }
+        animation.SeekFrameTime(effectiveElapsed.TotalSeconds);
+        var dst = new SKRect(
+            (float)destRect.X,
+            (float)destRect.Y,
+            (float)destRect.Right,
+            (float)destRect.Bottom);
+        canvas.Save();
+        animation.Render(canvas, dst);
+        canvas.Restore();
     }
 
     /// <inheritdoc/>
@@ -114,34 +103,12 @@ public class Lottie : Control
     {
         base.OnLoaded(routedEventArgs);
 
-        var elemVisual = ElementComposition.GetElementVisual(this);
-        var compositor = elemVisual?.Compositor;
-        if (compositor is null)
-        {
-            return;
-        }
-        
-        _customVisual = compositor.CreateCustomVisual(new LottieCompositionCustomVisualHandler());
-        ElementComposition.SetElementChildVisual(this, _customVisual);
-
-        LayoutUpdated += OnLayoutUpdated;
-
         if (_preloadPath is null)
         {
             return;
         }
 
-        DisposeImpl();
         Load(_preloadPath);
-
-        _customVisual.Size = new Vector2((float)Bounds.Size.Width, (float)Bounds.Size.Height);
-        _customVisual.SendHandlerMessage(
-            new LottiePayload(
-                LottieCommand.Update,
-                _animation, 
-                Stretch, 
-                StretchDirection));
-        
         Start();
         _preloadPath = null;
     }
@@ -149,56 +116,8 @@ public class Lottie : Control
     protected override void OnUnloaded(RoutedEventArgs routedEventArgs)
     {
         base.OnUnloaded(routedEventArgs);
-
-        LayoutUpdated -= OnLayoutUpdated;
-
         Stop();
         DisposeImpl();
-    }
-
-    private void OnLayoutUpdated(object? sender, EventArgs e)
-    {
-        if (_customVisual == null)
-        {
-            return;
-        }
-
-        _customVisual.Size = new Vector2((float)Bounds.Size.Width, (float)Bounds.Size.Height);
-        _customVisual.SendHandlerMessage(
-            new LottiePayload(
-                LottieCommand.Update, 
-                _animation, 
-                Stretch, 
-                StretchDirection));
-    }
-
-    /// <inheritdoc/>
-    protected override Size MeasureOverride(Size availableSize)
-    {
-        if (_animation == null)
-        {
-            return new Size();
-        }
-
-        var sourceSize = _animation is { }
-            ? new Size(_animation.Size.Width, _animation.Size.Height)
-            : default;
-
-        return Stretch.CalculateSize(availableSize, sourceSize, StretchDirection);
-    }
-
-    protected override Size ArrangeOverride(Size finalSize)
-    {
-        if (_animation == null)
-        {
-            return new Size();
-        }
-
-        var sourceSize = _animation is { }
-            ? new Size(_animation.Size.Width, _animation.Size.Height)
-            : default;
-
-        return Stretch.CalculateSize(finalSize, sourceSize);
     }
 
     /// <inheritdoc/>
@@ -212,20 +131,13 @@ public class Lottie : Control
             {
                 var path = change.GetNewValue<string?>();
 
-                if (_preloadPath is null && _customVisual is null)
+                if (_preloadPath is null && _animation is null && VisualRoot == null)
                 {
                     _preloadPath = path;
                     return;
                 }
 
                 Load(path);
-                break;
-            }
-            case nameof(RepeatCount):
-            {
-                _repeatCount = change.GetNewValue<int>();
-                Stop();
-                Start();
                 break;
             }
         }
@@ -254,8 +166,8 @@ public class Lottie : Control
 
     private SkiaSharp.Skottie.Animation? Load(string path, Uri? baseUri)
     {
-        var uri = path.StartsWith("/") 
-            ? new Uri(path, UriKind.Relative) 
+        var uri = path.StartsWith("/")
+            ? new Uri(path, UriKind.Relative)
             : new Uri(path, UriKind.RelativeOrAbsolute);
         if (uri.IsAbsoluteUri && uri.IsFile)
         {
@@ -287,7 +199,6 @@ public class Lottie : Control
 
         try
         {
-            _repeatCount = RepeatCount;
             _animation = Load(path, _baseUri);
 
             if (_animation is null)
@@ -309,24 +220,9 @@ public class Lottie : Control
         }
     }
 
-    private void Start()
-    {
-        _customVisual?.SendHandlerMessage(
-            new LottiePayload(
-                LottieCommand.Start,
-                _animation,
-                Stretch, 
-                StretchDirection, 
-                _repeatCount));
-    }
-
-    private void Stop()
-    {
-        _customVisual?.SendHandlerMessage(new LottiePayload(LottieCommand.Stop));
-    }
-
     private void DisposeImpl()
     {
-        _customVisual?.SendHandlerMessage(new LottiePayload(LottieCommand.Dispose));
+        _animation?.Dispose();
+        _animation = null;
     }
 }
