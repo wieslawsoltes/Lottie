@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Logging;
@@ -31,6 +32,17 @@ public class Lottie : CompositionAnimatedControl
     public static readonly StyledProperty<string?> PathProperty =
         AvaloniaProperty.Register<Lottie, string?>(nameof(Path));
 
+    public static readonly DirectProperty<Lottie, double> PositionSecondsProperty =
+        AvaloniaProperty.RegisterDirect<Lottie, double>(
+            nameof(PositionSeconds),
+            o => o.PositionSeconds,
+            (o, v) => o.PositionSeconds = v);
+
+    public static readonly DirectProperty<Lottie, double> DurationSecondsProperty =
+        AvaloniaProperty.RegisterDirect<Lottie, double>(
+            nameof(DurationSeconds),
+            o => o.DurationSeconds);
+
     /// <summary>
     /// Gets or sets the Lottie animation path.
     /// </summary>
@@ -40,6 +52,14 @@ public class Lottie : CompositionAnimatedControl
         get => GetValue(PathProperty);
         set => SetValue(PathProperty, value);
     }
+
+    public double PositionSeconds
+    {
+        get => Position.TotalSeconds;
+        set => SeekSeconds(value);
+    }
+
+    public double DurationSeconds => _animation?.Duration.TotalSeconds ?? 0.0;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Lottie"/> class.
@@ -63,6 +83,48 @@ public class Lottie : CompositionAnimatedControl
 
     private void WireHandlers() { }
 
+        /// <summary>
+        /// Starts or resumes playback.
+        /// </summary>
+        public void Play() => Start();
+
+        /// <summary>
+        /// Pauses playback.
+        /// </summary>
+        public void Pause() => base.Pause();
+
+        /// <summary>
+        /// Seek to a specific absolute time position.
+        /// </summary>
+        public void Seek(TimeSpan position) => base.Seek(position);
+
+        /// <summary>
+        /// Seek to a specific position given in seconds.
+        /// </summary>
+        public void SeekSeconds(double seconds)
+        {
+            if (seconds < 0)
+            {
+                seconds = 0;
+            }
+            base.Seek(TimeSpan.FromSeconds(seconds));
+        }
+
+        /// <summary>
+        /// Seek by normalized progress in range [0, 1].
+        /// </summary>
+        public void SeekProgress(double progress)
+        {
+            if (_animation is null)
+            {
+                return;
+            }
+            if (progress < 0) progress = 0;
+            if (progress > 1) progress = 1;
+            var target = TimeSpan.FromTicks((long)(_animation.Duration.Ticks * progress));
+            base.Seek(target);
+        }
+
     protected override Size OnGetSourceSize()
         => _animation is { } an ? new Size(an.Size.Width, an.Size.Height) : default;
 
@@ -73,7 +135,7 @@ public class Lottie : CompositionAnimatedControl
         var duration = _animation.Duration;
         if (duration <= TimeSpan.Zero)
             return new NormalizeResult(elapsed, false);
-        if (elapsed <= duration)
+        if (elapsed < duration)
             return new NormalizeResult(elapsed, false);
         var loops = (int)(elapsed.Ticks / duration.Ticks);
         var remainder = TimeSpan.FromTicks(elapsed.Ticks % duration.Ticks);
@@ -87,7 +149,13 @@ public class Lottie : CompositionAnimatedControl
         {
             return;
         }
-        animation.SeekFrameTime(effectiveElapsed.TotalSeconds);
+        var t = effectiveElapsed;
+        var d = animation.Duration;
+        if (d > TimeSpan.Zero && t >= d)
+        {
+            t = d - TimeSpan.FromTicks(1);
+        }
+        animation.SeekFrameTime(t.TotalSeconds);
         var dst = new SKRect(
             (float)destRect.X,
             (float)destRect.Y,
@@ -127,6 +195,13 @@ public class Lottie : CompositionAnimatedControl
 
         switch (change.Property.Name)
         {
+            case nameof(Position):
+            {
+                var oldS = change.GetOldValue<TimeSpan>().TotalSeconds;
+                var newS = change.GetNewValue<TimeSpan>().TotalSeconds;
+                RaisePropertyChanged(PositionSecondsProperty, oldS, newS);
+                break;
+            }
             case nameof(Path):
             {
                 var path = change.GetNewValue<string?>();
@@ -199,6 +274,7 @@ public class Lottie : CompositionAnimatedControl
 
         try
         {
+            var oldDurationSeconds = DurationSeconds;
             _animation = Load(path, _baseUri);
 
             if (_animation is null)
@@ -209,6 +285,7 @@ public class Lottie : CompositionAnimatedControl
             InvalidateArrange();
             InvalidateMeasure();
 
+            RaisePropertyChanged(DurationSecondsProperty, oldDurationSeconds, DurationSeconds);
             Start();
         }
         catch (Exception e)

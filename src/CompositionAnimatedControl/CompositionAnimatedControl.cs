@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Rendering.Composition;
+using Avalonia.Threading;
 using SkiaSharp;
 
 namespace Avalonia.Skia.Composition;
@@ -27,6 +28,12 @@ public abstract class CompositionAnimatedControl : Control
     public static readonly StyledProperty<int> RepeatCountProperty =
         AvaloniaProperty.Register<CompositionAnimatedControl, int>(nameof(RepeatCount), Infinity);
 
+    public static readonly StyledProperty<double> PlaybackRateProperty =
+        AvaloniaProperty.Register<CompositionAnimatedControl, double>(nameof(PlaybackRate), 1.0);
+
+    public static readonly StyledProperty<TimeSpan> PositionProperty =
+        AvaloniaProperty.Register<CompositionAnimatedControl, TimeSpan>(nameof(Position), TimeSpan.Zero);
+
     public Stretch Stretch
     {
         get => GetValue(StretchProperty);
@@ -43,6 +50,18 @@ public abstract class CompositionAnimatedControl : Control
     {
         get => GetValue(RepeatCountProperty);
         set => SetValue(RepeatCountProperty, value);
+    }
+
+    public double PlaybackRate
+    {
+        get => GetValue(PlaybackRateProperty);
+        set => SetValue(PlaybackRateProperty, value);
+    }
+
+    public TimeSpan Position
+    {
+        get => GetValue(PositionProperty);
+        private set => SetValue(PositionProperty, value);
     }
 
     public event Action<TimeSpan>? Update;
@@ -64,6 +83,7 @@ public abstract class CompositionAnimatedControl : Control
         var handler = new CompositionAnimatedCustomVisualHandler(
             () => OnGetSourceSize(),
             (canvas, destRect, elapsed, isRunning) => OnRender(canvas, destRect, elapsed, isRunning),
+            (pos, running) => Dispatcher.UIThread.Post(() => Position = pos),
             delta => { OnUpdate(delta); Update?.Invoke(delta); },
             () => { OnStarted(); Started?.Invoke(); },
             () => { OnStopped(); Stopped?.Invoke(); },
@@ -78,7 +98,7 @@ public abstract class CompositionAnimatedControl : Control
         ElementComposition.SetElementChildVisual(this, _customVisual);
 
         _customVisual.Size = new Vector2((float)Bounds.Size.Width, (float)Bounds.Size.Height);
-        _customVisual.SendHandlerMessage(new VisualPayload(VisualCommand.Update, null, Stretch, StretchDirection));
+        _customVisual.SendHandlerMessage(new VisualPayload(VisualCommand.Update, null, Stretch, StretchDirection, PlaybackRate));
 
         LayoutUpdated += OnLayoutUpdated;
     }
@@ -99,11 +119,14 @@ public abstract class CompositionAnimatedControl : Control
         {
             case nameof(Stretch):
             case nameof(StretchDirection):
-                _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Update, null, Stretch, StretchDirection));
+                _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Update, null, Stretch, StretchDirection, PlaybackRate));
                 break;
             case nameof(RepeatCount):
                 Stop();
                 Start();
+                break;
+            case nameof(PlaybackRate):
+                _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Update, null, Stretch, StretchDirection, PlaybackRate));
                 break;
         }
     }
@@ -122,12 +145,27 @@ public abstract class CompositionAnimatedControl : Control
 
     public void Start()
     {
-        _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Start, RepeatCount, Stretch, StretchDirection));
+        _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Start, RepeatCount, Stretch, StretchDirection, PlaybackRate));
     }
 
     public void Stop()
     {
         _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Stop));
+    }
+
+    public void Pause()
+    {
+        _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Pause));
+    }
+
+    public void Resume()
+    {
+        _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Resume, RepeatCount, Stretch, StretchDirection, PlaybackRate));
+    }
+
+    public void Seek(TimeSpan position)
+    {
+        _customVisual?.SendHandlerMessage(new VisualPayload(VisualCommand.Seek, null, Stretch, StretchDirection, PlaybackRate, position));
     }
 
     private void OnLayoutUpdated(object? sender, EventArgs e)
@@ -138,7 +176,7 @@ public abstract class CompositionAnimatedControl : Control
         }
 
         _customVisual.Size = new Vector2((float)Bounds.Size.Width, (float)Bounds.Size.Height);
-        _customVisual.SendHandlerMessage(new VisualPayload(VisualCommand.Update, null, Stretch, StretchDirection));
+        _customVisual.SendHandlerMessage(new VisualPayload(VisualCommand.Update, null, Stretch, StretchDirection, PlaybackRate));
     }
 
     public void Redraw()

@@ -12,6 +12,7 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
 {
     private readonly Func<Size> _getSourceSize;
     private readonly Action<SKCanvas, Rect, TimeSpan, bool> _render;
+    private readonly Action<TimeSpan, bool> _onPositionChanged;
     private readonly Action<TimeSpan> _onUpdate;
     private readonly Action _onStarted;
     private readonly Action _onStopped;
@@ -25,10 +26,12 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
     private StretchDirection? _stretchDirection;
     private int _repeatCount;
     private int _completedLoops;
+    private double _playbackRate = 1.0;
 
     public CompositionAnimatedCustomVisualHandler(
         Func<Size> getSourceSize,
         Action<SKCanvas, Rect, TimeSpan, bool> render,
+        Action<TimeSpan, bool> onPositionChanged,
         Action<TimeSpan> onUpdate,
         Action onStarted,
         Action onStopped,
@@ -37,6 +40,7 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
     {
         _getSourceSize = getSourceSize;
         _render = render;
+        _onPositionChanged = onPositionChanged;
         _onUpdate = onUpdate;
         _onStarted = onStarted;
         _onStopped = onStopped;
@@ -61,13 +65,43 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
                 _repeatCount = rp;
                 _completedLoops = 0;
                 _animationElapsed = TimeSpan.Zero;
+                _playbackRate = msg.PlaybackRate ?? 1.0;
                 _onStarted();
+                _onPositionChanged(TimeSpan.Zero, _running);
                 RegisterForNextAnimationFrameUpdate();
                 break;
 
             case { VisualCommand: VisualCommand.Update, Stretch: { } st, StretchDirection: { } sd }:
                 _stretch = st;
                 _stretchDirection = sd;
+                _playbackRate = msg.PlaybackRate ?? _playbackRate;
+                Invalidate();
+                RegisterForNextAnimationFrameUpdate();
+                break;
+
+            case { VisualCommand: VisualCommand.Seek, Position: { } pos, Stretch: { } st, StretchDirection: { } sd }:
+                _stretch = st;
+                _stretchDirection = sd;
+                _animationElapsed = pos;
+                _lastServerTime = null;
+                _completedLoops = 0;
+                Invalidate();
+                _onPositionChanged(_animationElapsed, _running);
+                RegisterForNextAnimationFrameUpdate();
+                break;
+
+            case { VisualCommand: VisualCommand.Pause }:
+                _running = false;
+                _onPositionChanged(_animationElapsed, _running);
+                break;
+
+            case { VisualCommand: VisualCommand.Resume, Stretch: { } st, StretchDirection: { } sd }:
+                _running = true;
+                _stretch = st;
+                _stretchDirection = sd;
+                _playbackRate = msg.PlaybackRate ?? _playbackRate;
+                _lastServerTime = null;
+                _onPositionChanged(_animationElapsed, _running);
                 RegisterForNextAnimationFrameUpdate();
                 break;
 
@@ -80,6 +114,7 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
                 _animationElapsed = TimeSpan.Zero;
                 _completedLoops = 0;
                 _onStopped();
+                _onPositionChanged(_animationElapsed, _running);
                 break;
 
             case { VisualCommand: VisualCommand.Dispose }:
@@ -97,7 +132,7 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
         if (_repeatCount == 0 || (_repeatCount > 0 && _completedLoops >= _repeatCount))
         {
             _running = false;
-            _animationElapsed = TimeSpan.Zero;
+            // do not reset _animationElapsed here to preserve last frame for pause/stop behavior
         }
 
         Invalidate();
@@ -111,13 +146,14 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
             return;
         }
 
-        if (_running)
+            if (_running)
         {
             if (_lastServerTime.HasValue)
             {
-                var delta = CompositionNow - _lastServerTime.Value;
-                _animationElapsed += delta;
-                _onUpdate(delta);
+                    var delta = CompositionNow - _lastServerTime.Value;
+                    var scaled = TimeSpan.FromTicks((long)(delta.Ticks * _playbackRate));
+                    _animationElapsed += scaled;
+                    _onUpdate(scaled);
             }
             _lastServerTime = CompositionNow;
         }
@@ -145,6 +181,8 @@ internal class CompositionAnimatedCustomVisualHandler : CompositionCustomVisualH
         {
             _completedLoops++;
         }
+
+        _onPositionChanged(effectiveElapsed, _running);
 
         using var lease = leaseFeature.Lease();
         var canvas = lease?.SkCanvas;
