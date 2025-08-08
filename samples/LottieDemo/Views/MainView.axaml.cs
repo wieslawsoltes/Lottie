@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using LottieDemo.ViewModels;
+using Avalonia.Interactivity;
 
 namespace LottieDemo.Views;
 
@@ -16,6 +17,29 @@ public partial class MainView : UserControl
         AddHandler(DragDrop.DropEvent, Drop);
     }
 
+    private void OnPlayClicked(object? sender, RoutedEventArgs e)
+    {
+        var lottie = this.FindControl<Avalonia.Skia.Lottie.Lottie>("Lottie");
+        lottie?.Play();
+    }
+
+    private void OnPauseClicked(object? sender, RoutedEventArgs e)
+    {
+        var lottie = this.FindControl<Avalonia.Skia.Lottie.Lottie>("Lottie");
+        lottie?.Pause();
+    }
+
+    private void OnStopClicked(object? sender, RoutedEventArgs e)
+    {
+        var lottie = this.FindControl<Avalonia.Skia.Lottie.Lottie>("Lottie");
+        lottie?.Stop();
+    }
+
+    private void OnResumeClicked(object? sender, RoutedEventArgs e)
+    {
+        var lottie = this.FindControl<Avalonia.Skia.Lottie.Lottie>("Lottie");
+        lottie?.Resume();
+    }
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);

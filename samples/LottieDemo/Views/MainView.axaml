@@ -79,6 +79,37 @@
                        Minimum="-1" />
         <CheckBox Margin="10,10,0,0" 
                   IsChecked="{Binding EnableCheckerboard}" Content="Checkerboard" />
+
+        <Button Margin="10,10,0,0" Click="OnPlayClicked">Play</Button>
+        <Button Margin="10,10,0,0" Click="OnPauseClicked">Pause</Button>
+        <Button Margin="10,10,0,0" Click="OnResumeClicked">Resume</Button>
+        <Button Margin="10,10,0,0" Click="OnStopClicked">Stop</Button>
+
+        <TextBlock Margin="10,10,0,0" VerticalAlignment="Center"
+                   Text="Rate:" />
+        <TextBlock Margin="4,10,0,0" VerticalAlignment="Center"
+                   Text="{Binding #Lottie.PlaybackRate, StringFormat={}{0:0.0}x}" />
+        <Slider Margin="10,10,0,0"
+                Width="200"
+                Minimum="0.1"
+                Maximum="10.0"
+                TickFrequency="0.1"
+                IsSnapToTickEnabled="True"
+                Value="{Binding #Lottie.PlaybackRate}" />
+
+        <TextBlock Margin="10,10,0,0" VerticalAlignment="Center"
+                   Text="Position:" />
+        <Slider Margin="10,10,0,0"
+                Width="300"
+                Minimum="0"
+                Maximum="{Binding #Lottie.DurationSeconds}"
+                Value="{Binding #Lottie.PositionSeconds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Margin="4,10,0,0" VerticalAlignment="Center"
+                   Text="{Binding #Lottie.PositionSeconds, StringFormat={}{0:0.000}s}" />
+        <TextBlock Margin="4,10,0,0" VerticalAlignment="Center"
+                   Text="/" />
+        <TextBlock Margin="4,10,0,0" VerticalAlignment="Center"
+                   Text="{Binding #Lottie.DurationSeconds, StringFormat={}{0:0.000}s}" />
       </WrapPanel>
     </Grid>
   </Panel>
