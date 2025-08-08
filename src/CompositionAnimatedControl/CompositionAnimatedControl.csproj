@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
@@ -6,21 +6,18 @@
     <IsPackable>True</IsPackable>
     <TrimMode>copyused</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <RootNamespace>Avalonia.Skia.Lottie</RootNamespace>
+    <RootNamespace>Avalonia.Skia.Composition</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
-    <Description>An lottie animation player control for Avalonia.</Description>
-    <PackageId>Lottie</PackageId>
+    <Description>Reusable composition-backed Skia control for static and animated rendering in Avalonia.</Description>
+    <PackageId>CompositionAnimatedControl</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>lottie;animation;player;vector graphics;rendering;2d;graphics;geometry;shapes;skiasharp;skia;skottie;control;avalonia;avaloniaui</PackageTags>
+    <PackageTags>avalonia;control;composition;animation;rendering;skiasharp;skia</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
-    <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaSharpVersion)" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="../CompositionAnimatedControl/CompositionAnimatedControl.csproj" />
   </ItemGroup>
 </Project>
+
