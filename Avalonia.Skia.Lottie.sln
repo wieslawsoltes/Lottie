@@ -29,6 +29,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5A20E547-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositionAnimatedControlDemo", "samples\CompositionAnimatedControlDemo\CompositionAnimatedControlDemo.csproj", "{6F54CE9D-BC2B-45B3-8A91-B91C14C9FAA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EffectsDemo", "samples\EffectsDemo\EffectsDemo.csproj", "{49AD67D5-95BE-40C0-943B-A2DBA4F29C5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderAnimatedControl", "src\ShaderAnimatedControl\ShaderAnimatedControl.csproj", "{8AF9B40F-9A19-4F12-BD49-C6A84ADE4D84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,14 @@ Global
 		{6F54CE9D-BC2B-45B3-8A91-B91C14C9FAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F54CE9D-BC2B-45B3-8A91-B91C14C9FAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F54CE9D-BC2B-45B3-8A91-B91C14C9FAA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49AD67D5-95BE-40C0-943B-A2DBA4F29C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49AD67D5-95BE-40C0-943B-A2DBA4F29C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49AD67D5-95BE-40C0-943B-A2DBA4F29C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49AD67D5-95BE-40C0-943B-A2DBA4F29C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AF9B40F-9A19-4F12-BD49-C6A84ADE4D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AF9B40F-9A19-4F12-BD49-C6A84ADE4D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AF9B40F-9A19-4F12-BD49-C6A84ADE4D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AF9B40F-9A19-4F12-BD49-C6A84ADE4D84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +82,7 @@ Global
 		{CE7E4ADC-8AD8-4973-8F89-58669CC38DA8} = {BB17F9CC-92ED-43AD-B21E-3AFECEFE0AD1}
 		{3100A013-2B75-42AE-B611-3FB1207559DD} = {63AB3979-8A62-4F66-923F-0080C6D384DE}
 		{6F54CE9D-BC2B-45B3-8A91-B91C14C9FAA2} = {BB17F9CC-92ED-43AD-B21E-3AFECEFE0AD1}
+		{49AD67D5-95BE-40C0-943B-A2DBA4F29C5C} = {BB17F9CC-92ED-43AD-B21E-3AFECEFE0AD1}
+		{8AF9B40F-9A19-4F12-BD49-C6A84ADE4D84} = {63AB3979-8A62-4F66-923F-0080C6D384DE}
 	EndGlobalSection
 EndGlobal

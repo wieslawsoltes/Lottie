@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <IsPackable>True</IsPackable>
+    <TrimMode>copyused</TrimMode>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <RootNamespace>Avalonia.Skia.Composition</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Description>Reusable Skia shader-based animated control for Avalonia.</Description>
+    <PackageId>ShaderAnimatedControl</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>avalonia;control;composition;animation;rendering;skiasharp;skia;shader</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="SkiaSharp" Version="3.119.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompositionAnimatedControl\CompositionAnimatedControl.csproj" />
+  </ItemGroup>
+</Project>
