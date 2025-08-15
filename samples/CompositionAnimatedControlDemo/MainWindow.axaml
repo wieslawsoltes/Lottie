@@ -5,6 +5,7 @@
         Width="700" Height="520"
         Title="CompositionAnimatedControl Demo">
   <TabControl Margin="12">
+
     <TabItem Header="Simple Animated">
       <local:SimpleTimelineControl/>
     </TabItem>
