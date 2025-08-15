@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <IsPackable>True</IsPackable>
+    <TrimMode>copyused</TrimMode>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <RootNamespace>Avalonia.Controls</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Description>Reusable animation control base class for Avalonia applications.</Description>
+    <PackageId>AnimationControl</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>avalonia;control;animation;rendering;base</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+</Project>

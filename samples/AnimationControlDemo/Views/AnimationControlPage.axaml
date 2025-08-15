@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:AnimationControlDemo.Controls"
+             x:Class="AnimationControlDemo.Views.AnimationControlPage">
+  <DockPanel Margin="4">
+    <TextBlock DockPanel.Dock="Top" Classes="h2">Simple RequestAnimationFrame animation.</TextBlock>
+    <controls:EllipseAnimationControl Height="100" />
+  </DockPanel>
+</UserControl>
