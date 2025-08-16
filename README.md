@@ -5,18 +5,74 @@
 [![NuGet](https://img.shields.io/nuget/v/Lottie.svg)](https://www.nuget.org/packages/Lottie)
 [![NuGet](https://img.shields.io/nuget/dt/Lottie.svg)](https://www.nuget.org/packages/Lottie)
 
+[![NuGet](https://img.shields.io/nuget/v/AnimationControl.svg)](https://www.nuget.org/packages/AnimationControl)
+[![NuGet](https://img.shields.io/nuget/v/CompositionAnimatedControl.svg)](https://www.nuget.org/packages/CompositionAnimatedControl)
+[![NuGet](https://img.shields.io/nuget/v/ShaderAnimatedControl.svg)](https://www.nuget.org/packages/ShaderAnimatedControl)
+
+A collection of animation controls for Avalonia including Lottie animation player and reusable base controls for custom animations.
+
+## Controls
+
+### Lottie Control
+
 A lottie animation player control for Avalonia.
 
-## Usage
+**Installation:**
+```
+dotnet add package Lottie
+```
+
+**Basic Usage:**
 
 ```xaml
 <Lottie Path="/Assets/LottieLogo1.json" />
 ```
 
-## Generic composition control for custom Skia rendering
+### AnimationControl
 
-This package now includes a reusable base control for Skia rendering with optional animation: `CompositionAnimatedControl`.
+A reusable base class for creating custom animation controls in Avalonia. This control provides a simple animation frame loop that you can override to create custom animations.
+
+**Installation:**
+```
+dotnet add package AnimationControl
+```
+
+**Basic Usage:**
+
+```csharp
+public class MyAnimationControl : AnimationControl
+{
+    protected override void OnAnimationFrame(TimeSpan now, TimeSpan last)
+    {
+        // Your animation logic here
+        // The control will automatically invalidate and request the next frame
+        var deltaTime = now - last;
+        // Update your animation state based on deltaTime
+    }
+
+    public override void Render(DrawingContext context)
+    {
+        base.Render(context);
+        // Your custom rendering logic here
+    }
+}
+```
+
+**Key Features:**
+- Automatic animation frame loop when attached to visual tree
+- Override `OnAnimationFrame(TimeSpan now, TimeSpan last)` for animation logic
+- Automatic visual invalidation after each frame
+- Lightweight base for simple custom animations
+
+### CompositionAnimatedControl
+
+A reusable base control for Skia rendering with optional animation using Avalonia's composition layer.
 It is override-first: subclass it and override a small set of virtual methods.
+
+**Installation:**
+```
+dotnet add package CompositionAnimatedControl
+```
 
 ### Mode 1: Animated rendering (time-based or per-frame update)
 
@@ -126,6 +182,70 @@ public sealed class StaticRedrawControl : CompositionAnimatedControl
 Notes:
 - `Redraw()` issues a single render pass without starting the animation scheduler.
 - `Stretch` and `StretchDirection` are supported in both modes.
+
+### ShaderAnimatedControl
+
+A reusable control for rendering animated Skia shaders in Avalonia. This control loads and executes SKSL (Skia Shading Language) shaders with animation support.
+
+**Installation:**
+```
+dotnet add package ShaderAnimatedControl
+```
+
+**Basic Usage:**
+
+```xaml
+<ShaderAnimatedControl 
+    ShaderUri="/Assets/MyShader.sksl"
+    ShaderWidth="512"
+    ShaderHeight="512"
+    IsShaderFillCanvas="False" />
+```
+
+```csharp
+// Handle the Draw event for custom shader parameter binding
+public partial class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+        myShaderControl.Draw += OnShaderDraw;
+    }
+
+    private void OnShaderDraw(object? sender, DrawEventArgs e)
+    {
+        if (e.Effect == null || e.ErrorText != null)
+            return;
+
+        // Create shader with custom parameters
+        var time = (float)e.EffectiveElapsed.TotalSeconds;
+        var resolution = new SKPoint((float)e.ShaderWidth, (float)e.ShaderHeight);
+        
+        using var shader = e.Effect.ToShader(
+            new SKRuntimeEffectUniforms(e.Effect)
+            {
+                ["iTime"] = time,
+                ["iResolution"] = resolution
+            });
+        
+        using var paint = new SKPaint { Shader = shader };
+        e.Canvas.DrawRect(e.DestRect, paint);
+    }
+}
+```
+
+**Key Features:**
+- Load SKSL shaders from assets or URIs
+- Automatic animation loop with time-based parameters
+- Configurable shader dimensions
+- Fill canvas or maintain aspect ratio modes
+- Draw event for custom shader parameter binding
+- Built on top of CompositionAnimatedControl
+
+**Properties:**
+- `ShaderUri`: URI to the SKSL shader file
+- `ShaderWidth`/`ShaderHeight`: Logical shader dimensions
+- `IsShaderFillCanvas`: Whether to fill the entire canvas or maintain aspect ratio
 
 ## Links
 
