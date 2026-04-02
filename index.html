@@ -1,31 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html data-lunet-theme-mode="system" data-lunet-theme-storage-key="lunet-theme" data-lunet-css-prefix="lunet" lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="lunet 1.0.10.0">
+    <script>(function(){const root=document.documentElement;const key=root.getAttribute("data-lunet-theme-storage-key")||"lunet-theme";const fallback=root.getAttribute("data-lunet-theme-mode")||"system";let stored=null;try{stored=localStorage.getItem(key);}catch(_){stored=null;}const mode=(stored==="light"||stored==="dark"||stored==="system")?stored:fallback;const prefersDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;const resolved=mode==="system"?(prefersDark?"dark":"light"):mode;root.setAttribute("data-lunet-theme-mode",mode);root.setAttribute("data-bs-theme",resolved);}());</script>
+    <link rel='icon' href='/Lottie/favicon.ico' sizes='32x32'>
+    <title>Lottie for Avalonia | Lottie for Avalonia</title>
+    <link rel="stylesheet" href="/Lottie/css/lite.css">
+    <script src="/Lottie/js/lite-defer.js" defer></script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@wieslawsoltes">
+<meta name="twitter:title" content="Lottie for Avalonia | Lottie for Avalonia">
+<meta name="twitter:description" content="Avalonia Animation Toolkit Lottie for Avalonia Lottie for Avalonia bundles a production-ready Lottie player plus reusable animation building blocks for custom timelines, composition-backed Skia rendering, and shader-driven effects. Start Getting Started Explore Packages Browse API Start Here Installation Choose the right NuGet package, confirm Avalonia + Skia prerequisites, and wire the controls into your app. Quickstart: Lottie Load a JSON animation, bind playback controls, and seek through the timeline from...">
+<meta name="twitter:image" content="https://wieslawsoltes.github.io/Lottie/images/lottie-hero.svg">
+<meta name="twitter:image:alt" content="Lottie for Avalonia | Lottie for Avalonia">
+<meta property="og:title" content="Lottie for Avalonia | Lottie for Avalonia">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wieslawsoltes.github.io/Lottie">
+<meta property="og:description" content="Avalonia Animation Toolkit Lottie for Avalonia Lottie for Avalonia bundles a production-ready Lottie player plus reusable animation building blocks for custom timelines, composition-backed Skia rendering, and shader-driven effects. Start Getting Started Explore Packages Browse API Start Here Installation Choose the right NuGet package, confirm Avalonia + Skia prerequisites, and wire the controls into your app. Quickstart: Lottie Load a JSON animation, bind playback controls, and seek through the timeline from...">
+<meta property="og:image" content="https://wieslawsoltes.github.io/Lottie/images/lottie-hero.svg">
+<meta property="og:image:alt" content="Lottie for Avalonia | Lottie for Avalonia">
+  </head>
+  <body>
 
-<head>
-    <title>Lottie Demos</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/Avalonia.Skia.Lottie/" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-    <link rel="modulepreload" href="./main.js" />
-    <link rel="modulepreload" href="./dotnet.js" />
-    <link rel="modulepreload" href="./avalonia.js" />
-    <link rel="stylesheet" href="./app.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">    
-</head>
-
-<body style="margin: 0px">
-    <div id="out">                
-        <div id="avalonia-splash"> 
-            <div class="center">
-                <h2 class="purple">                   
-                    Powered by
-                    <a class="highlight" href="https://www.avaloniaui.net/" target="_blank">Avalonia UI</a></h2>              
-            </div>             
+    <div id="lunet" class="container">
+      <nav class="navbar navbar-expand-md ">
+        <a class="navbar-brand" href="/Lottie/">
+          <img class="lunet-logo" src="/Lottie/images/logo.svg" alt="Lottie for Avalonia" width="96" height="96">
+          <span class="visually-hidden">Home</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-between">
+<ol id='nav-id-home-0' class='navbar-nav nav-level0 show '>
+  <li id='nav-item-home-1' class='nav-item  active'>
+    <span class='nav-item-row'><a href='/Lottie/' class='nav-link  '><i class='bi bi-house-door' aria-hidden='true'></i> Home</a></span>  </li>
+  <li id='nav-item-home-2' class='nav-item '>
+    <span class='nav-item-row'><a href='/Lottie/articles/' class='nav-link  '><i class='bi bi-book' aria-hidden='true'></i> Docs</a></span>  </li>
+  <li id='nav-item-home-3' class='nav-item '>
+    <span class='nav-item-row'><a href='/Lottie/api/' class='nav-link  '><i class='bi bi-braces' aria-hidden='true'></i> API</a></span>  </li>
+</ol>
+          <ol class="navbar-nav flex-grow-1" style="padding-right: 0.5rem;">
+            <li class="nav-item w-100">
+                <div class="lunet-search dropdown w-100">
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input id="search-input" type="search" class="form-control" placeholder="Search... (Alt+s)" aria-label="Search" aria-controls="search-results" data-bs-toggle="dropdown" data-bs-auto-close="outside" data-search-empty-message="Enter words to search..." data-search-no-results-message="No results found.">
+                    <ul id="search-results" class="dropdown-menu w-100 p-0" style="max-height: 50vh;" role="listbox" aria-labelledby="search-input"></ul>
+                  </div>
+                </div>
+            </li>
+          </ol>
+          <div class="d-flex align-items-center gap-2 flex-shrink-0 navbar-right">
+            <div class="dropdown">
+              <button
+                id="theme-mode-toggle"
+                class="btn btn-outline-secondary btn-sm lunet-theme-toggle dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Theme">
+                <i class="bi bi-circle-half" data-lunet-theme-toggle-icon aria-hidden="true"></i>
+                <span
+                  data-lunet-theme-toggle-label
+                  data-theme-system-label="System"
+                  data-theme-light-label="Light"
+                  data-theme-dark-label="Dark">Theme</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="theme-mode-toggle">
+                <li><button class="dropdown-item" type="button" data-lunet-theme-choice="system"><i class="bi bi-circle-half me-2"></i>System</button></li>
+                <li><button class="dropdown-item" type="button" data-lunet-theme-choice="light"><i class="bi bi-sun-fill me-2"></i>Light</button></li>
+                <li><button class="dropdown-item" type="button" data-lunet-theme-choice="dark"><i class="bi bi-moon-stars-fill me-2"></i>Dark</button></li>
+              </ul>
+            </div>
+<ol id='nav-id-home2-0' class='navbar-nav nav-level0 show flex-shrink-0'>
+  <li id='nav-item-home2-1' class='nav-item '>
+    <span class='nav-item-row'><a href='https://github.com/wieslawsoltes/Lottie' class='nav-link  btn btn-info'><i class="bi bi-github"></i> GitHub</a></span>  </li>
+</ol>
+          </div>
         </div>
-    </div>
-    <script type='module' src="./main.js"></script>
-</body>
+      </nav>
+      <div class="lunet lunet-home">
+        <section data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-timeout="1200" data-copy-tooltip="Copy to Clipboard." data-copy-tooltip-success="Copied!" data-copy-tooltip-error="Failed to copy!">
 
+<div class="container">
+<!-- lunet:summarize -->
+<div class="lottie-hero">
+  <div class="lottie-eyebrow"><i class="bi bi-stars" aria-hidden="true"></i> Avalonia Animation Toolkit</div>
+  <div class="lottie-hero-split">
+    <div>
+      <h1>Lottie for Avalonia</h1>
+      <p class="lead"><strong>Lottie for Avalonia</strong> bundles a production-ready <code>Lottie</code> player plus reusable animation building blocks for custom timelines, composition-backed Skia rendering, and shader-driven effects.</p>
+      <div class="lottie-hero-actions">
+        <a class="btn btn-primary btn-lg" href="articles/getting-started/installation"><i class="bi bi-rocket-takeoff" aria-hidden="true"></i> Start Getting Started</a>
+        <a class="btn btn-outline-secondary btn-lg" href="articles/packages/readme"><i class="bi bi-box-seam" aria-hidden="true"></i> Explore Packages</a>
+        <a class="btn btn-outline-secondary btn-lg" href="api"><i class="bi bi-braces-asterisk" aria-hidden="true"></i> Browse API</a>
+      </div>
+    </div>
+    <div class="lottie-hero-media">
+      <img src="images/lottie-hero.svg" alt="Lottie for Avalonia banner" />
+    </div>
+  </div>
+</div>
+<h2 id="start-here">Start Here</h2>
+<div class="lottie-card-grid">
+  <a class="lottie-card" href="articles/getting-started/installation">
+    <span class="lottie-card-title"><i class="bi bi-download" aria-hidden="true"></i> Installation</span>
+    <p>Choose the right NuGet package, confirm Avalonia + Skia prerequisites, and wire the controls into your app.</p>
+  </a>
+  <a class="lottie-card" href="articles/getting-started/quickstart-lottie">
+    <span class="lottie-card-title"><i class="bi bi-play-circle" aria-hidden="true"></i> Quickstart: Lottie</span>
+    <p>Load a JSON animation, bind playback controls, and seek through the timeline from XAML.</p>
+  </a>
+  <a class="lottie-card" href="articles/concepts/rendering-stack">
+    <span class="lottie-card-title"><i class="bi bi-layers" aria-hidden="true"></i> Rendering Stack</span>
+    <p>See how <code>AnimationControl</code>, <code>CompositionAnimatedControl</code>, <code>Lottie</code>, and <code>ShaderAnimatedControl</code> fit together.</p>
+  </a>
+  <a class="lottie-card" href="articles/samples">
+    <span class="lottie-card-title"><i class="bi bi-window-stack" aria-hidden="true"></i> Samples</span>
+    <p>Map each sample project to concrete playback, rendering, and effect scenarios in this repository.</p>
+  </a>
+</div>
+<h2 id="packages">Packages</h2>
+<div class="lottie-card-grid lottie-card-grid--wide">
+  <a class="lottie-card" href="articles/packages/lottie">
+    <span class="lottie-card-title"><i class="bi bi-file-earmark-play" aria-hidden="true"></i> Lottie</span>
+    <p>The end-user control for playing Skottie/Lottie JSON assets with seek, repeat-count, playback-rate, and duration tracking.</p>
+  </a>
+  <a class="lottie-card" href="articles/packages/animation-control">
+    <span class="lottie-card-title"><i class="bi bi-activity" aria-hidden="true"></i> AnimationControl</span>
+    <p>A minimal <code>RequestAnimationFrame</code>-style base class for custom animations rendered through Avalonia drawing primitives.</p>
+  </a>
+  <a class="lottie-card" href="articles/packages/composition-animated-control">
+    <span class="lottie-card-title"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> CompositionAnimatedControl</span>
+    <p>A composition-backed Skia control with update, redraw, seek, and repeat semantics for custom animated visuals.</p>
+  </a>
+  <a class="lottie-card" href="articles/packages/shader-animated-control">
+    <span class="lottie-card-title"><i class="bi bi-lightning-charge" aria-hidden="true"></i> ShaderAnimatedControl</span>
+    <p>A shader host that loads SKSL, raises a draw callback, and lets you bind time- and size-based uniforms on each frame.</p>
+  </a>
+</div>
+<h2 id="documentation-sections">Documentation Sections</h2>
+<div class="lottie-card-grid lottie-card-grid--wide">
+  <a class="lottie-card" href="articles/getting-started/readme">
+    <span class="lottie-card-title"><i class="bi bi-signpost-split" aria-hidden="true"></i> Getting Started</span>
+    <p>Package installation, the first Lottie control, and the repository assumptions behind the runtime.</p>
+  </a>
+  <a class="lottie-card" href="articles/concepts/readme">
+    <span class="lottie-card-title"><i class="bi bi-diagram-3" aria-hidden="true"></i> Concepts</span>
+    <p>Understand the rendering layers, playback model, redraw flow, and where composition enters the picture.</p>
+  </a>
+  <a class="lottie-card" href="articles/packages/readme">
+    <span class="lottie-card-title"><i class="bi bi-boxes" aria-hidden="true"></i> Packages</span>
+    <p>Package-by-package guidance for the four NuGet artifacts shipped from this repository.</p>
+  </a>
+  <a class="lottie-card" href="articles/guides/readme">
+    <span class="lottie-card-title"><i class="bi bi-journal-code" aria-hidden="true"></i> Guides</span>
+    <p>Practical recipes for asset loading, playback control, shader uniform binding, and troubleshooting.</p>
+  </a>
+  <a class="lottie-card" href="articles/reference/readme">
+    <span class="lottie-card-title"><i class="bi bi-collection" aria-hidden="true"></i> Reference</span>
+    <p>Package maps, API coverage, sample-project inventory, docs pipeline details, and licensing.</p>
+  </a>
+</div>
+<h2 id="repository">Repository</h2>
+<ul>
+<li>Source code and issues: <a href="https://github.com/wieslawsoltes/Lottie">github.com/wieslawsoltes/Lottie</a></li>
+<li>Published docs target: <a href="https://wieslawsoltes.github.io/Lottie">wieslawsoltes.github.io/Lottie</a></li>
+</ul>
+
+</div>
+        </section>
+        <footer>
+          <hr>
+          <p>Copyright &copy; 2026, Wieslaw Soltes aka <a href="https://github.com/wieslawsoltes">wieslawsoltes</a> - Content licensed under the Creative Commons <a href="http://creativecommons.org/licenses/by/2.5/">CC BY 2.5</a> | Site generated by <a href="https://github.com/lunet-io/lunet">lunet</a> hosted on <a href="https://pages.github.com/">GitHub Pages</a></p>
+        </footer>
+      </div>
+    </div>
+
+  </body>
 </html>

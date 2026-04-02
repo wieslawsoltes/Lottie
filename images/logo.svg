@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Lottie for Avalonia logo</title>
+  <desc id="desc">A rounded-square icon with layered motion frames and a play symbol.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a45" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+    <linearGradient id="frame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff7f2" />
+      <stop offset="100%" stop-color="#dcfdf7" />
+    </linearGradient>
+  </defs>
+
+  <rect x="16" y="16" width="224" height="224" rx="52" fill="url(#bg)" />
+
+  <g opacity="0.16">
+    <rect x="48" y="48" width="160" height="160" rx="36" fill="#ffffff" transform="rotate(-11 128 128)" />
+  </g>
+
+  <g fill="none" stroke="url(#frame)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="62" y="62" width="132" height="132" rx="30" stroke-width="12" transform="rotate(-11 128 128)" />
+    <rect x="86" y="86" width="84" height="84" rx="22" stroke-width="10" transform="rotate(13 128 128)" opacity="0.94" />
+  </g>
+
+  <circle cx="128" cy="128" r="34" fill="#ffffff" opacity="0.18" />
+  <path d="M117 103l40 25-40 25z" fill="#fffaf6" />
+</svg>

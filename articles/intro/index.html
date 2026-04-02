@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html data-lunet-theme-mode="system" data-lunet-theme-storage-key="lunet-theme" data-lunet-css-prefix="lunet" lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="lunet 1.0.10.0">
+    <script>(function(){const root=document.documentElement;const key=root.getAttribute("data-lunet-theme-storage-key")||"lunet-theme";const fallback=root.getAttribute("data-lunet-theme-mode")||"system";let stored=null;try{stored=localStorage.getItem(key);}catch(_){stored=null;}const mode=(stored==="light"||stored==="dark"||stored==="system")?stored:fallback;const prefersDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;const resolved=mode==="system"?(prefersDark?"dark":"light"):mode;root.setAttribute("data-lunet-theme-mode",mode);root.setAttribute("data-bs-theme",resolved);}());</script>
+    <link rel='icon' href='/Lottie/favicon.ico' sizes='32x32'>
+    <title>Introduction | Lottie for Avalonia</title>
+    <link rel="stylesheet" href="/Lottie/css/lite.css">
+    <script src="/Lottie/js/lite-defer.js" defer></script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@wieslawsoltes">
+<meta name="twitter:title" content="Introduction | Lottie for Avalonia">
+<meta name="twitter:description" content="Introduction Lottie is a small animation-focused repository with four reusable packages: Lottie: a Skottie-powered control for playing .json Lottie assets in Avalonia. AnimationControl: a lightweight base class for custom animations driven by RequestAnimationFrame. CompositionAnimatedControl: a composition-backed Skia host for animated or static redraw scenarios. ShaderAnimatedControl: a shader-oriented control that loads SKSL and exposes a draw callback for uniform binding. Why this repository exists Avalonia applications often need animation surfaces at...">
+<meta name="twitter:image" content="https://wieslawsoltes.github.io/Lottie/images/lottie-hero.svg">
+<meta name="twitter:image:alt" content="Introduction | Lottie for Avalonia">
+<meta property="og:title" content="Introduction | Lottie for Avalonia">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wieslawsoltes.github.io/Lottie">
+<meta property="og:description" content="Introduction Lottie is a small animation-focused repository with four reusable packages: Lottie: a Skottie-powered control for playing .json Lottie assets in Avalonia. AnimationControl: a lightweight base class for custom animations driven by RequestAnimationFrame. CompositionAnimatedControl: a composition-backed Skia host for animated or static redraw scenarios. ShaderAnimatedControl: a shader-oriented control that loads SKSL and exposes a draw callback for uniform binding. Why this repository exists Avalonia applications often need animation surfaces at...">
+<meta property="og:image" content="https://wieslawsoltes.github.io/Lottie/images/lottie-hero.svg">
+<meta property="og:image:alt" content="Introduction | Lottie for Avalonia">
+  </head>
+  <body>
+
+    <div id="lunet" class="container">
+      <nav class="navbar navbar-expand-md sticky-top">
+        <a class="navbar-brand" href="/Lottie/">
+          <img class="lunet-logo" src="/Lottie/images/logo.svg" alt="Lottie for Avalonia" width="96" height="96">
+          <span class="visually-hidden">Home</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse justify-content-between">
+<ol id='nav-id-home-0' class='navbar-nav nav-level0 show '>
+  <li id='nav-item-home-1' class='nav-item '>
+    <span class='nav-item-row'><a href='/Lottie/' class='nav-link  '><i class='bi bi-house-door' aria-hidden='true'></i> Home</a></span>  </li>
+  <li id='nav-item-home-2' class='nav-item  active'>
+    <span class='nav-item-row'><a href='/Lottie/articles/' class='nav-link  '><i class='bi bi-book' aria-hidden='true'></i> Docs</a></span>  </li>
+  <li id='nav-item-home-3' class='nav-item '>
+    <span class='nav-item-row'><a href='/Lottie/api/' class='nav-link  '><i class='bi bi-braces' aria-hidden='true'></i> API</a></span>  </li>
+</ol>
+          <ol class="navbar-nav flex-grow-1" style="padding-right: 0.5rem;">
+            <li class="nav-item w-100">
+                <div class="lunet-search dropdown w-100">
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input id="search-input" type="search" class="form-control" placeholder="Search... (Alt+s)" aria-label="Search" aria-controls="search-results" data-bs-toggle="dropdown" data-bs-auto-close="outside" data-search-empty-message="Enter words to search..." data-search-no-results-message="No results found.">
+                    <ul id="search-results" class="dropdown-menu w-100 p-0" style="max-height: 50vh;" role="listbox" aria-labelledby="search-input"></ul>
+                  </div>
+                </div>
+            </li>
+          </ol>
+          <div class="d-flex align-items-center gap-2 flex-shrink-0 navbar-right">
+            <div class="dropdown">
+              <button
+                id="theme-mode-toggle"
+                class="btn btn-outline-secondary btn-sm lunet-theme-toggle dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Theme">
+                <i class="bi bi-circle-half" data-lunet-theme-toggle-icon aria-hidden="true"></i>
+                <span
+                  data-lunet-theme-toggle-label
+                  data-theme-system-label="System"
+                  data-theme-light-label="Light"
+                  data-theme-dark-label="Dark">Theme</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="theme-mode-toggle">
+                <li><button class="dropdown-item" type="button" data-lunet-theme-choice="system"><i class="bi bi-circle-half me-2"></i>System</button></li>
+                <li><button class="dropdown-item" type="button" data-lunet-theme-choice="light"><i class="bi bi-sun-fill me-2"></i>Light</button></li>
+                <li><button class="dropdown-item" type="button" data-lunet-theme-choice="dark"><i class="bi bi-moon-stars-fill me-2"></i>Dark</button></li>
+              </ul>
+            </div>
+<ol id='nav-id-home2-0' class='navbar-nav nav-level0 show flex-shrink-0'>
+  <li id='nav-item-home2-1' class='nav-item '>
+    <span class='nav-item-row'><a href='https://github.com/wieslawsoltes/Lottie' class='nav-link  btn btn-info'><i class="bi bi-github"></i> GitHub</a></span>  </li>
+</ol>
+          </div>
+        </div>
+      </nav>
+      <div class="lunet lunet-articles">
+        <section data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-timeout="1200" data-copy-tooltip="Copy to Clipboard." data-copy-tooltip-success="Copied!" data-copy-tooltip-error="Failed to copy!">
+
+<div class="container-xxl">
+  <div class="row">
+      <!-- Left sidebar - responsive offcanvas (offcanvas on mobile, visible sidebar on md+) -->
+      <nav id="docs-sidebar-menu" class="col-md-3 col-lg-3 col-xl-3 col-xxl-2 offcanvas-md offcanvas-start sticky-md-top menu-sidebar align-self-start order-1 order-md-0" tabindex="-1" aria-labelledby="docs-sidebar-menu-label" aria-expanded="true">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="docs-sidebar-menu-label">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#docs-sidebar-menu" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ol id='menu-id-articles-0' class='menu menu-level0 show '>
+            <li id='menu-item-articles-1' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/' class='menu-link  '>Articles</a></span>  </li>
+            <li id='menu-item-articles-2' class='menu-item  active'>
+              <span class='menu-item-row'><a href='/Lottie/articles/intro/' class='menu-link  '>Introduction</a></span>  </li>
+            <li id='menu-item-articles-3' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/getting-started/' class='menu-link  '>Getting Started</a><a href='#menu-id-articles-3' role='button' data-bs-toggle='collapse' aria-expanded='false' aria-controls='menu-id-articles-3' class='menu-link-show collapsed'></a></span>  <ol id='menu-id-articles-3' class='menu menu-level1 collapse '>
+              <li id='menu-item-articles-4' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/getting-started/installation/' class='menu-link  '>Installation</a></span>    </li>
+              <li id='menu-item-articles-5' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/getting-started/quickstart-lottie/' class='menu-link  '>Quickstart: Lottie Player</a></span>    </li>
+            </ol>
+            </li>
+            <li id='menu-item-articles-6' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/concepts/' class='menu-link  '>Concepts</a><a href='#menu-id-articles-6' role='button' data-bs-toggle='collapse' aria-expanded='false' aria-controls='menu-id-articles-6' class='menu-link-show collapsed'></a></span>  <ol id='menu-id-articles-6' class='menu menu-level1 collapse '>
+              <li id='menu-item-articles-7' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/concepts/rendering-stack/' class='menu-link  '>Rendering Stack</a></span>    </li>
+              <li id='menu-item-articles-8' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/concepts/playback-and-redraw/' class='menu-link  '>Playback and Redraw Model</a></span>    </li>
+            </ol>
+            </li>
+            <li id='menu-item-articles-9' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/packages/' class='menu-link  '>Packages</a><a href='#menu-id-articles-9' role='button' data-bs-toggle='collapse' aria-expanded='false' aria-controls='menu-id-articles-9' class='menu-link-show collapsed'></a></span>  <ol id='menu-id-articles-9' class='menu menu-level1 collapse '>
+              <li id='menu-item-articles-10' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/packages/lottie/' class='menu-link  '>Lottie</a></span>    </li>
+              <li id='menu-item-articles-11' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/packages/animation-control/' class='menu-link  '>AnimationControl</a></span>    </li>
+              <li id='menu-item-articles-12' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/packages/composition-animated-control/' class='menu-link  '>CompositionAnimatedControl</a></span>    </li>
+              <li id='menu-item-articles-13' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/packages/shader-animated-control/' class='menu-link  '>ShaderAnimatedControl</a></span>    </li>
+            </ol>
+            </li>
+            <li id='menu-item-articles-14' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/guides/' class='menu-link  '>Guides</a><a href='#menu-id-articles-14' role='button' data-bs-toggle='collapse' aria-expanded='false' aria-controls='menu-id-articles-14' class='menu-link-show collapsed'></a></span>  <ol id='menu-id-articles-14' class='menu menu-level1 collapse '>
+              <li id='menu-item-articles-15' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/guides/asset-loading-and-seeking/' class='menu-link  '>Asset Loading and Seeking</a></span>    </li>
+              <li id='menu-item-articles-16' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/guides/shader-uniform-binding/' class='menu-link  '>Shader Uniform Binding</a></span>    </li>
+              <li id='menu-item-articles-17' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/guides/troubleshooting/' class='menu-link  '>Troubleshooting</a></span>    </li>
+            </ol>
+            </li>
+            <li id='menu-item-articles-18' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/reference/' class='menu-link  '>Reference</a><a href='#menu-id-articles-18' role='button' data-bs-toggle='collapse' aria-expanded='false' aria-controls='menu-id-articles-18' class='menu-link-show collapsed'></a></span>  <ol id='menu-id-articles-18' class='menu menu-level1 collapse '>
+              <li id='menu-item-articles-19' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/reference/packages-and-namespaces/' class='menu-link  '>Packages and Namespaces</a></span>    </li>
+              <li id='menu-item-articles-20' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/reference/api-coverage-index/' class='menu-link  '>API Coverage Index</a></span>    </li>
+              <li id='menu-item-articles-21' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/reference/sample-apps/' class='menu-link  '>Sample Apps</a></span>    </li>
+              <li id='menu-item-articles-22' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/reference/lunet-docs-pipeline/' class='menu-link  '>Lunet Docs Pipeline</a></span>    </li>
+              <li id='menu-item-articles-23' class='menu-item '>
+                <span class='menu-item-row'><a href='/Lottie/articles/reference/license/' class='menu-link  '>License</a></span>    </li>
+            </ol>
+            </li>
+            <li id='menu-item-articles-24' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/samples/' class='menu-link  '>Samples</a></span>  </li>
+            <li id='menu-item-articles-25' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/build-and-package/' class='menu-link  '>Build and Package</a></span>  </li>
+            <li id='menu-item-articles-26' class='menu-item '>
+              <span class='menu-item-row'><a href='/Lottie/articles/license/' class='menu-link  '>License</a></span>  </li>
+          </ol>
+
+        </div>
+      </nav>
+      <!-- Right sidebar (TOC) - collapsible on mobile, visible sidebar on xxl+ -->
+      <aside id="docs-sidebar-toc" class="col-12 col-xxl-2 sticky-xxl-top menu-sidebar align-self-start order-0 order-xxl-2 collapse d-xxl-block" aria-expanded="true">
+        <h3 class="toc-title">On this page</h3>
+        <nav class="js-toc"></nav>
+      </aside>
+      <!-- Main content column -->
+      <div class="col-12 col-md-9 col-lg-9 col-xl-9 col-xxl-8 order-2 order-md-1 js-toc-content">
+        <ol class='breadcrumb'>
+          <li class='breadcrumb-item '>
+            <a href='/Lottie/' class='breadcrumb-link  '><i class='bi bi-house-door' aria-hidden='true'></i> Home</a>  </li>
+          <li class='breadcrumb-item '>
+            <a href='/Lottie/articles/' class='breadcrumb-link  '><i class='bi bi-book' aria-hidden='true'></i> Docs</a>  </li>
+          <li class='breadcrumb-item  active'>
+            Introduction  </li>
+        </ol>
+
+        <p id="lunet-results"></p>
+        <!-- Toggle buttons visible only on small screens -->
+        <div class="d-md-none mb-3">
+          <button
+            class="btn btn-outline-secondary btn-sm me-2"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#docs-sidebar-menu"
+            aria-controls="docs-sidebar-menu"
+            aria-label="Toggle docs menu">
+            Menu
+          </button>
+          <button
+            class="btn btn-outline-secondary btn-sm d-xxl-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#docs-sidebar-toc"
+            aria-controls="docs-sidebar-toc"
+            aria-expanded="false"
+            aria-label="Toggle Table Of Contents">
+            On this page
+          </button>
+        </div>
+<!-- lunet:summarize -->
+<h1 id="introduction">Introduction</h1>
+<p><code>Lottie</code> is a small animation-focused repository with four reusable packages:</p>
+<ul>
+<li><code>Lottie</code>: a Skottie-powered control for playing <code>.json</code> Lottie assets in Avalonia.</li>
+<li><code>AnimationControl</code>: a lightweight base class for custom animations driven by <code>RequestAnimationFrame</code>.</li>
+<li><code>CompositionAnimatedControl</code>: a composition-backed Skia host for animated or static redraw scenarios.</li>
+<li><code>ShaderAnimatedControl</code>: a shader-oriented control that loads SKSL and exposes a draw callback for uniform binding.</li>
+</ul>
+<h2 id="why-this-repository-exists">Why this repository exists</h2>
+<p>Avalonia applications often need animation surfaces at different abstraction levels:</p>
+<ul>
+<li>a ready-to-use player for Lottie assets,</li>
+<li>a simple frame loop for custom <code>DrawingContext</code> rendering,</li>
+<li>a Skia canvas hosted in the composition layer,</li>
+<li>or a way to run shader effects inside an Avalonia control.</li>
+</ul>
+<p>This repository keeps those layers in one place so the packages can build on each other instead of duplicating scheduling and rendering code.</p>
+<h2 id="package-relationships">Package relationships</h2>
+<table class="table">
+<thead>
+<tr>
+<th>Package</th>
+<th>Depends on</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AnimationControl</code></td>
+<td><code>Avalonia</code></td>
+<td>Basic custom controls that animate with Avalonia drawing primitives</td>
+</tr>
+<tr>
+<td><code>CompositionAnimatedControl</code></td>
+<td><code>Avalonia</code>, <code>Avalonia.Skia</code>, <code>SkiaSharp</code></td>
+<td>Custom Skia rendering with playback, seek, repeat, and redraw support</td>
+</tr>
+<tr>
+<td><code>Lottie</code></td>
+<td><code>CompositionAnimatedControl</code>, <code>SkiaSharp.Skottie</code></td>
+<td>Playing Lottie/Skottie JSON animations</td>
+</tr>
+<tr>
+<td><code>ShaderAnimatedControl</code></td>
+<td><code>CompositionAnimatedControl</code>, <code>SkiaSharp</code></td>
+<td>Running SKSL shaders with app-controlled uniforms</td>
+</tr>
+</tbody>
+</table>
+<h2 id="key-concepts">Key concepts</h2>
+<ul>
+<li><strong>Layered design</strong>: <code>Lottie</code> and <code>ShaderAnimatedControl</code> reuse the scheduling and rendering pipeline in <code>CompositionAnimatedControl</code>.</li>
+<li><strong>Skia-first rendering</strong>: the higher-level packages assume the Avalonia Skia backend because they render into <code>SKCanvas</code>.</li>
+<li><strong>Authoring flexibility</strong>: you can start with the <code>Lottie</code> player and move down to base controls only when you need custom drawing behavior.</li>
+<li><strong>Sample-backed docs</strong>: each package has a matching sample project in <code>samples/</code> so the authored docs stay grounded in working code.</li>
+</ul>
+
+      </div>
+  </div>
+</div>
+
+        </section>
+        <footer>
+          <hr>
+          <p>Copyright &copy; 2026, Wieslaw Soltes aka <a href="https://github.com/wieslawsoltes">wieslawsoltes</a> - Content licensed under the Creative Commons <a href="http://creativecommons.org/licenses/by/2.5/">CC BY 2.5</a> | Site generated by <a href="https://github.com/lunet-io/lunet">lunet</a> hosted on <a href="https://pages.github.com/">GitHub Pages</a></p>
+        </footer>
+      </div>
+    </div>
+
+  </body>
+</html>
