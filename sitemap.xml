@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/api-coverage-index</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/intro</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/license</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/build-and-package</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/lunet-docs-pipeline</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/sample-apps</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages/composition-animated-control</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages/lottie</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
     <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages/shader-animated-control</loc>
     <lastmod>2026-04-12</lastmod>
   </url>
@@ -9,27 +57,7 @@
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/samples</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages/animation-control</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages/composition-animated-control</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/concepts</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/sample-apps</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/guides/troubleshooting</loc>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/guides</loc>
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
@@ -37,15 +65,7 @@
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages/lottie</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/guides</loc>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/guides/troubleshooting</loc>
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
@@ -53,39 +73,7 @@
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/getting-started/installation</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/concepts/rendering-stack</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/getting-started</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/getting-started/quickstart-lottie</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/lunet-docs-pipeline</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/intro</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/license</loc>
-    <lastmod>2026-04-12</lastmod>
-  </url>
-  <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/reference/api-coverage-index</loc>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/concepts</loc>
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
@@ -93,11 +81,23 @@
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles</loc>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/concepts/rendering-stack</loc>
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/build-and-package</loc>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/getting-started/installation</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/getting-started/quickstart-lottie</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/getting-started</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+  <url>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/samples</loc>
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
@@ -105,7 +105,7 @@
     <lastmod>2026-04-12</lastmod>
   </url>
   <url>
-    <loc>https://wieslawsoltes.github.io/Lottie/Lottie</loc>
+    <loc>https://wieslawsoltes.github.io/Lottie/Lottie/articles/packages/animation-control</loc>
     <lastmod>2026-04-12</lastmod>
   </url>
 </urlset>
