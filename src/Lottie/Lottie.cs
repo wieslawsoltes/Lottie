@@ -1,5 +1,7 @@
-﻿using System;
+using System;
 using System.IO;
+using System.Text;
+using System.Text.Json.Nodes;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -9,6 +11,8 @@ using Avalonia.Metadata;
 using Avalonia.Platform;
 using Avalonia.Skia.Composition;
 using SkiaSharp;
+using SkiaSharp.Resources;
+using SkiaSharp.Skottie;
 
 namespace Avalonia.Skia.Lottie;
 
@@ -221,7 +225,12 @@ public class Lottie : CompositionAnimatedControl
     private SkiaSharp.Skottie.Animation? Load(Stream stream)
     {
         using var managedStream = new SKManagedStream(stream);
-        if (SkiaSharp.Skottie.Animation.TryCreate(managedStream, out var animation))
+
+        var animation = SkiaSharp.Skottie.Animation.CreateBuilder()
+            .SetResourceProvider(new DataUriResourceProvider())
+            .Build(managedStream);
+
+        if (animation != null)
         {
             animation.Seek(0);
 
@@ -244,7 +253,7 @@ public class Lottie : CompositionAnimatedControl
         var uri = path.StartsWith("/")
             ? new Uri(path, UriKind.Relative)
             : new Uri(path, UriKind.RelativeOrAbsolute);
-        if (uri.IsAbsoluteUri && uri.IsFile)
+        if (uri is {IsAbsoluteUri: true, IsFile: true})
         {
             using var fileStream = File.OpenRead(uri.LocalPath);
             return Load(fileStream);
@@ -253,11 +262,57 @@ public class Lottie : CompositionAnimatedControl
         using var assetStream = AssetLoader.Open(uri, baseUri);
 
         if (assetStream is null)
-        {
             return default;
+
+        using var reader = new StreamReader(assetStream);
+        var json = reader.ReadToEnd();
+
+        var root = JsonNode.Parse(json)!.AsObject();
+
+        if (root["assets"] is not JsonArray assets)
+            return Load(new MemoryStream(Encoding.UTF8.GetBytes(json)));
+
+        foreach (var item in assets)
+        {
+            if (item is not JsonObject asset)
+                continue;
+
+            var p = asset["p"]?.GetValue<string>() ?? "";
+            var u = asset["u"]?.GetValue<string>() ?? "";
+
+            if (string.IsNullOrWhiteSpace(p) || p.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            var imageUri = new Uri(uri, $"{u}{p}");
+
+            if (!AssetLoader.Exists(imageUri, baseUri))
+                continue;
+
+            using var imageAsset = AssetLoader.Open(imageUri, baseUri);
+            using var memoryStream = new MemoryStream();
+
+            imageAsset.CopyTo(memoryStream);
+
+            var mime = GetMimeType(p);
+            var dataUri = $"data:{mime};base64,{Convert.ToBase64String(memoryStream.ToArray())}";
+
+            asset["u"] = "";
+            asset["p"] = dataUri;
         }
 
-        return Load(assetStream);
+        return Load(new MemoryStream(Encoding.UTF8.GetBytes(root.ToJsonString())));
+    }
+
+    private static string GetMimeType(string fileName)
+    {
+        return System.IO.Path.GetExtension(fileName).ToLowerInvariant() switch
+        {
+            ".jpg" or ".jpeg" => "image/jpeg",
+            ".webp" => "image/webp",
+            ".gif" => "image/gif",
+            ".bmp" => "image/bmp",
+            _ => "image/png"
+        };
     }
 
     private void Load(string? path)
